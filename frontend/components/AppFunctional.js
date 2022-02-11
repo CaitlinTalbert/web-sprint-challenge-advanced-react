@@ -1,6 +1,19 @@
-import React from 'react'
+import React, {useState} from 'react'
+
 
 export default function AppFunctional(props) {
+  const [form, setForm] = useState(" ")
+
+  const handleChange = (e) => {
+  setForm(e.target.value)
+  }
+  console.log(form)
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    props.handleSubmit(form)
+  }
+
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">
@@ -29,8 +42,8 @@ export default function AppFunctional(props) {
         <button id="reset">reset</button>
       </div>
       <form>
-        <input id="email" type="email" placeholder="type email"></input>
-        <input id="submit" type="submit"></input>
+        <input value={form} name="form" id="email" type="email" placeholder="type email" onChange={handleChange}></input>
+        <input id="submit" type="submit" onSubmit={handleSubmit}></input>
       </form>
     </div>
   )
