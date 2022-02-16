@@ -62,12 +62,7 @@ export default function AppFunctional(props) {
           ...value, 
           message: 'Email required'
         })
-      } else {
-        setValue({ 
-          ...value, 
-          message: 'Must be a valid email'
-        })
-      }
+      } 
     })
   }
   
