@@ -1,18 +1,40 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react'; 
+import axios from 'axios';
+
+const initialState = {
+  x: 2, 
+  y: 2, 
+  steps: 0, 
+  email: '', 
+  message: ''
+}
 
 
 export default function AppFunctional(props) {
-  const [form, setForm] = useState(" ")
+  const [value, setValue] = useState(initialState)
 
-  const handleChange = (e) => {
-  setForm(e.target.value)
+  const onChange = e => {
+    setValue({ 
+      ...value, 
+      email: e.target.value
+    })
   }
-  console.log(form)
 
-  const handleSubmit = (e) => {
+  const onSubmit = e => {
     e.preventDefault(); 
-    props.handleSubmit(form)
+    
+    axios.post('http://localhost:9000/api/result', value)
+    .then(resp => {
+      setValue({ 
+        ...value, 
+        message: resp.data.message
+      })
+    })
+    .catch(error => {
+      console.log(error)
+    })
   }
+  
 
   return (
     <div id="wrapper" className={props.className}>
@@ -42,8 +64,8 @@ export default function AppFunctional(props) {
         <button id="reset">reset</button>
       </div>
       <form>
-        <input value={form} name="form" id="email" type="email" placeholder="type email" onChange={handleChange}></input>
-        <input id="submit" type="submit" onSubmit={handleSubmit}></input>
+        <input id="email" type="email" placeholder="type email" onChange={onChange}></input>
+        <input id="submit" type="submit" onSubmit={onSubmit}></input>
       </form>
     </div>
   )

@@ -1,35 +1,34 @@
 import React from 'react';
 import axios from 'axios';
 
+export default class AppClass extends React.Component {
+  state = {
+    x: 2,
+    y: 2,
+    steps: 0,
+    email: '', 
+    message: ''
+  }
 
-const initialState = {
-  x: "is an integer between 1 and 3.",
-  y:  "is an integer between 1 and 3.",
-  steps: "is an integer larger than 0.",
-  email: "is a valid email address.", 
-  message: ""
+onChange = event => {
+  this.setState({ 
+    ...this.state, 
+    email: event.target.value
+  })
 }
 
-export default class AppClass extends React.Component {
-  
-  state = initialState 
-
-
-
 onSubmit = event => {
-  event.preventDefault()
-  const payload = { message: this.state.message, email: this.state.email, steps: this.state.steps, x: this.state.x, y: this.state.y }
-axios.post('http://localhost:9000/api/result', payload)
-  .then(res => {
-    console.log(res)
+  event.preventDefault(); 
+
+  axios.post('http://localhost:9000/api/result', this.state)
+  .then(resp => {
+    this.setState({
+      message: resp.data.message
+    })
   })
   .catch(err => {
     console.log({err})
   })
-}
-
-handleClick = (e) => {
-  console.log("click")
 }
 
 
@@ -42,28 +41,28 @@ handleClick = (e) => {
           <h3 id="steps">You moved 0 times</h3>
         </div>
         <div id="grid">
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square active">B</div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
+          <div className="square" id="1"></div>
+          <div className="square" id="2"></div>
+          <div className="square" id="3"></div>
+          <div className="square" id="4"></div>
+          <div className="square active" id="5">B</div>
+          <div className="square" id="6"></div>
+          <div className="square" id="7"></div>
+          <div className="square" id="8"></div>
+          <div className="square" id="9"></div>
         </div>
         <div className="info">
           <h3 id="message"></h3>
         </div>
         <div id="keypad">
-          <button id="left" onClick={this.handleClick}>LEFT</button>
-          <button id="up" onClick={this.handleClick}>UP</button>
-          <button id="right" onClick={this.handleClick}>RIGHT</button>
-          <button id="down" onClick={this.handleClick}>DOWN</button>
-          <button id="reset" onClick={this.handleClick}>reset</button>
+          <button id="left" onClick={this.onClick}>LEFT</button>
+          <button id="up" onClick={this.onClick}>UP</button>
+          <button id="right" onClick={this.onClick}>RIGHT</button>
+          <button id="down" onClick={this.onClick}>DOWN</button>
+          <button id="reset" onClick={this.onClick}>reset</button>
         </div>
         <form>
-          <input id="email" type="email" placeholder="type email"></input>
+          <input id="email" type="email" placeholder="type email" onChange={this.onChange}></input>
           <input id="submit" type="submit" onSubmit={this.onSubmit}></input>
         </form>
       </div>
