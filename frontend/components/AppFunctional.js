@@ -13,6 +13,26 @@ const initialState = {
 export default function AppFunctional(props) {
   const [value, setValue] = useState(initialState)
 
+  const leftClick = () => {
+    console.log("left click")
+  }
+
+  const upClick = () => {
+    console.log("up click")
+  }
+
+  const rightClick = () => {
+    console.log("right click")
+  }
+
+  const downClick = () => {
+    console.log("down click")
+  }
+
+  const resetClick = () => {
+    console.log("reset click")
+  }
+
   const onChange = e => {
     setValue({ 
       ...value, 
@@ -57,11 +77,11 @@ export default function AppFunctional(props) {
         <h3 id="message"></h3>
       </div>
       <div id="keypad">
-        <button id="left">LEFT</button>
-        <button id="up">UP</button>
-        <button id="right">RIGHT</button>
-        <button id="down">DOWN</button>
-        <button id="reset">reset</button>
+        <button id="left" onClick={leftClick}>LEFT</button>
+        <button id="up" onClick={upClick}>UP</button>
+        <button id="right" onClick={rightClick}>RIGHT</button>
+        <button id="down" onClick={downClick}>DOWN</button>
+        <button id="reset" onClick={resetClick}>reset</button>
       </div>
       <form>
         <input id="email" type="email" placeholder="type email" onChange={onChange}></input>

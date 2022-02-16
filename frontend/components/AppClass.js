@@ -10,6 +10,27 @@ export default class AppClass extends React.Component {
     message: ''
   }
 
+  leftClick = () => {
+    console.log("click")
+  }
+
+  upClick = () => {
+    console.log("click")
+  }
+
+  rightClick = () => {
+    console.log("click")
+  }
+
+  downClick = () => {
+    console.log("click")
+  }
+
+  resetClick = () => {
+    console.log("click")
+  }
+
+
 onChange = event => {
   this.setState({ 
     ...this.state, 
@@ -55,11 +76,11 @@ onSubmit = event => {
           <h3 id="message"></h3>
         </div>
         <div id="keypad">
-          <button id="left" onClick={this.onClick}>LEFT</button>
-          <button id="up" onClick={this.onClick}>UP</button>
-          <button id="right" onClick={this.onClick}>RIGHT</button>
-          <button id="down" onClick={this.onClick}>DOWN</button>
-          <button id="reset" onClick={this.onClick}>reset</button>
+          <button id="left" onClick={this.leftClick}>LEFT</button>
+          <button id="up" onClick={this.upClick}>UP</button>
+          <button id="right" onClick={this.rightClick}>RIGHT</button>
+          <button id="down" onClick={this.downClick}>DOWN</button>
+          <button id="reset" onClick={this.resetClick}>reset</button>
         </div>
         <form>
           <input id="email" type="email" placeholder="type email" onChange={this.onChange}></input>
