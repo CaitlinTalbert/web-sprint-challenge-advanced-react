@@ -52,6 +52,22 @@ export default function AppFunctional(props) {
     })
     .catch(error => {
       console.log(error)
+      if (value.email === 'foo@bar.baz') {
+        setValue ({ 
+          ...value, 
+          message: "foo@bar.baz failure"
+        })
+      } else if (value.email === '') {
+        setValue ({ 
+          ...value, 
+          message: 'Email required'
+        })
+      } else {
+        setValue({ 
+          ...value, 
+          message: 'Must be a valid email'
+        })
+      }
     })
   }
   

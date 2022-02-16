@@ -10,6 +10,12 @@ export default class AppClass extends React.Component {
     message: ''
   }
 
+  /**
+   *(1, 1) (2, 1) (3, 1)
+    (1, 2) (2, 2) (3, 2)
+    (1, 3) (2, 3) (3, 3)
+   */
+
   leftClick = () => {
     console.log("click")
   }
@@ -49,6 +55,16 @@ onSubmit = event => {
   })
   .catch(err => {
     console.log({err})
+    if (this.state.email === 'foo@bar.baz') {
+      this.setState({ 
+        message: 'foo@bar.baz forbidden error'
+      })
+    } else if (this.state.email === '') {
+      this.setState({ 
+        ...this.state, 
+        message: 'Must be a valid email'
+      })
+    }
   })
 }
 
