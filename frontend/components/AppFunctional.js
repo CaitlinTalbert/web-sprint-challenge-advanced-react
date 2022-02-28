@@ -43,6 +43,17 @@ export default function AppFunctional(props) {
   };
 
   const rightClick = () => {
+    value.x <= 2 && value.x >= 1
+      ? setValue({
+          ...value,
+          x: value.x + 1,
+          steps: value.steps + 1,
+        })
+      : setValue({
+          ...value,
+          x: value.x === 3 ? 3 : value.x,
+          message: "You can't go right",
+        });
     console.log("right click");
   };
 
@@ -118,8 +129,20 @@ export default function AppFunctional(props) {
         >
           {value.x === 3 && value.y === 1 ? "B" : ""}
         </div>
-        <div className="square"></div>
-        <div className="square active">B</div>
+        <div
+          className={
+            value.x === 1 && value.y === 2 ? "square action" : "square"
+          }
+        >
+          {value.x === 1 && value.y === 2 ? "B" : ""}
+        </div>
+        <div
+          className={
+            value.x === 2 && value.y === 2 ? "square action" : "square"
+          }
+        >
+          {value.x === 2 && value.y === 2 ? "B" : ""}
+        </div>
         <div className="square"></div>
         <div className="square"></div>
         <div className="square"></div>
