@@ -15,6 +15,7 @@ const initialState = {
    (1, 3) (2, 3) (3, 3)
  * up & down = y
    left & right = x 
+   reset will go back 2,2
  * */
 
 export default function AppFunctional(props) {
@@ -81,6 +82,12 @@ export default function AppFunctional(props) {
   };
 
   const resetClick = () => {
+    setValue({
+      ...value,
+      x: 2,
+      y: 2,
+      steps: 0,
+    });
     console.log("reset click");
   };
 

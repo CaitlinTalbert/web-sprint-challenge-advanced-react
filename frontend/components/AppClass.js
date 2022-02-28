@@ -83,6 +83,11 @@ export default class AppClass extends React.Component {
   };
 
   resetClick = () => {
+    this.setState({
+      x: 2,
+      y: 2,
+      steps: 0,
+    });
     console.log("click");
   };
 
