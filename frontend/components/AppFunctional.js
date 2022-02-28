@@ -100,10 +100,10 @@ export default function AppFunctional(props) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
     axios
       .post("http://localhost:9000/api/result", value)
       .then((resp) => {
+        console.log(resp);
         setValue({
           ...value,
           message: resp.data.message,
@@ -114,12 +114,17 @@ export default function AppFunctional(props) {
         if (value.email === "foo@bar.baz") {
           setValue({
             ...value,
-            message: "foo@bar.baz failure",
+            message: "foo@bar.baz failure #71",
           });
         } else if (value.email === "") {
           setValue({
             ...value,
-            message: "Email required",
+            message: "Ouch: email is required",
+          });
+        } else {
+          setValue({
+            ...value,
+            message: "Ouch: email must be a valid email",
           });
         }
       });

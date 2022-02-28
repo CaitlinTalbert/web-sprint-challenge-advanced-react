@@ -100,15 +100,16 @@ export default class AppClass extends React.Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    const payload = {
-      x: this.state.grid.x,
-      y: this.state.grid.y,
-      steps: this.state.counter,
-      email: this.state.email,
-    };
+    // const payload = {
+    //   x: this.state.grid.x,
+    //   y: this.state.grid.y,
+    //   steps: this.state.counter,
+    //   email: this.state.email,
+    // };
     axios
-      .post("http://localhost:9000/api/result", payload)
+      .post("http://localhost:9000/api/result", this.state)
       .then((resp) => {
+        console.log(resp);
         this.setState({
           ...this.state,
           message: resp.data.message,
@@ -135,8 +136,10 @@ export default class AppClass extends React.Component {
     return (
       <div id="wrapper" className={className}>
         <div className="info">
-          <h3 id="coordinates">Coordinates (2, 2)</h3>
-          <h3 id="steps">You moved 0 times</h3>
+          <h3 id="coordinates">
+            Coordinates {this.state.x}, {this.state.y}
+          </h3>
+          <h3 id="steps">You moved {this.state.steps} times</h3>
         </div>
         <div id="grid">
           <div
