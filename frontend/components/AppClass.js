@@ -11,12 +11,29 @@ export default class AppClass extends React.Component {
   };
 
   /**
-   *(1, 1) (2, 1) (3, 1)
-    (1, 2) (2, 2) (3, 2)
-    (1, 3) (2, 3) (3, 3)
-   */
+ * (1, 1) (2, 1) (3, 1)
+   (1, 2) (2, 2) (3, 2)
+   (1, 3) (2, 3) (3, 3)
+ * up & down = y
+   left & right = x 
+   so moving left = - x
+   moving right = + x 
+   moving up = - y
+   moving down = + y
+ * */
 
   leftClick = () => {
+    this.state.x <= 3 && this.state.x >= 2
+      ? this.setState({
+          ...this.state,
+          x: this.state.x - 1,
+          steps: this.state.steps + 1,
+        })
+      : this.setState({
+          ...this.state,
+          x: this.state.x === 3 ? 2 : this.state.x,
+          message: "You can't go left",
+        });
     console.log("click");
   };
 
@@ -84,17 +101,87 @@ export default class AppClass extends React.Component {
           <h3 id="steps">You moved 0 times</h3>
         </div>
         <div id="grid">
-          <div className="square" id="1"></div>
-          <div className="square" id="2"></div>
-          <div className="square" id="3"></div>
-          <div className="square" id="4"></div>
-          <div className="square active" id="5">
-            B
+          <div
+            className={
+              this.state.x === 1 && this.state.y === 1
+                ? "square active"
+                : "square"
+            }
+          >
+            {this.state.x === 1 && this.state.y === 1 ? "B" : ""}
           </div>
-          <div className="square" id="6"></div>
-          <div className="square" id="7"></div>
-          <div className="square" id="8"></div>
-          <div className="square" id="9"></div>
+          <div
+            className={
+              this.state.x === 2 && this.state.y === 1
+                ? "square active"
+                : "square"
+            }
+          >
+            {this.state.x === 2 && this.state.y === 1 ? "B" : ""}
+          </div>
+          <div
+            className={
+              this.state.x === 3 && this.state.y === 1
+                ? "square active"
+                : "square"
+            }
+          >
+            {this.state.x === 3 && this.state.y === 1 ? "B" : ""}
+          </div>
+          <div
+            className={
+              this.state.x === 1 && this.state.y === 2
+                ? "square active"
+                : "square"
+            }
+          >
+            {this.state.x === 1 && this.state.y === 2 ? "B" : ""}
+          </div>
+          <div
+            className={
+              this.state.x === 2 && this.state.y === 2
+                ? "square active"
+                : "square"
+            }
+          >
+            {this.state.x === 2 && this.state.y === 2 ? "B" : ""}
+          </div>
+          <div
+            className={
+              this.state.x === 3 && this.state.y === 2
+                ? "square active"
+                : "square"
+            }
+          >
+            {this.state.x === 3 && this.state.y === 2 ? "B" : ""}
+          </div>
+          <div
+            className={
+              this.state.x === 1 && this.state.y === 3
+                ? "square active"
+                : "square"
+            }
+          >
+            {this.state.x === 1 && this.state.y === 3 ? "B" : ""}
+          </div>
+          <div
+            className={
+              this.state.x === 2 && this.state.y === 3
+                ? "square active"
+                : "square"
+            }
+          >
+            {this.state.x === 2 && this.state.y === 3 ? "B" : ""}
+          </div>
+          <div
+            className={
+              this.state.x === 3 && this.state.y === 3
+                ? "square active"
+                : "square"
+            }
+          >
+            {this.state.x === 3 && this.state.y === 3 ? "B" : ""}
+          </div>
         </div>
         <div className="info">
           <h3 id="message"></h3>
