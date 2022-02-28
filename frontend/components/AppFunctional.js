@@ -9,6 +9,14 @@ const initialState = {
   message: "",
 };
 
+/**
+ * (1, 1) (2, 1) (3, 1)
+   (1, 2) (2, 2) (3, 2)
+   (1, 3) (2, 3) (3, 3)
+ * up & down = y
+   left & right = x 
+ * */
+
 export default function AppFunctional(props) {
   const [value, setValue] = useState(initialState);
 
@@ -58,6 +66,17 @@ export default function AppFunctional(props) {
   };
 
   const downClick = () => {
+    value.y <= 2 && value.y >= 1
+      ? setValue({
+          ...value,
+          y: value.y + 1,
+          steps: value.steps + 1,
+        })
+      : setValue({
+          ...value,
+          y: value.y === 3 ? 3 : value.y,
+          message: "You cant go down",
+        });
     console.log("down click");
   };
 
@@ -131,22 +150,46 @@ export default function AppFunctional(props) {
         </div>
         <div
           className={
-            value.x === 1 && value.y === 2 ? "square action" : "square"
+            value.x === 1 && value.y === 2 ? "square active" : "square"
           }
         >
           {value.x === 1 && value.y === 2 ? "B" : ""}
         </div>
         <div
           className={
-            value.x === 2 && value.y === 2 ? "square action" : "square"
+            value.x === 2 && value.y === 2 ? "square active" : "square"
           }
         >
           {value.x === 2 && value.y === 2 ? "B" : ""}
         </div>
-        <div className="square"></div>
-        <div className="square"></div>
-        <div className="square"></div>
-        <div className="square"></div>
+        <div
+          className={
+            value.x === 3 && value.y === 2 ? "square active" : "square"
+          }
+        >
+          {value.x === 3 && value.y === 2 ? "B" : ""}
+        </div>
+        <div
+          className={
+            value.x === 1 && value.y === 3 ? "square active" : "square"
+          }
+        >
+          {value.x === 1 && value.y === 3 ? "B" : ""}
+        </div>
+        <div
+          className={
+            value.x === 2 && value.y === 3 ? "square active" : "square"
+          }
+        >
+          {value.x === 2 && value.y === 3 ? "B" : ""}
+        </div>
+        <div
+          className={
+            value.x === 3 && value.y === 3 ? "square active" : "square"
+          }
+        >
+          {value.x == 3 && value.y === 3 ? "B" : ""}
+        </div>
       </div>
       <div className="info">
         <h3 id="message"></h3>
