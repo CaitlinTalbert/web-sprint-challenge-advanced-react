@@ -30,6 +30,8 @@ export default function AppFunctional(props) {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    const emailInput = document.querySelector("#email");
+    emailInput.value = "";
 
     axios
       .post("http://localhost:9000/api/result", value)

@@ -83,6 +83,8 @@ export default class AppClass extends React.Component {
       x: 2,
       y: 2,
       steps: 0,
+      email: "",
+      message: "",
     });
   };
 
@@ -104,23 +106,27 @@ export default class AppClass extends React.Component {
     axios
       .post("http://localhost:9000/api/result", this.state)
       .then((resp) => {
-        console.log(resp);
         this.setState({
           ...this.state,
           message: resp.data.message,
         });
-        console.log(this.state);
       })
       .catch((err) => {
         console.log({ err });
         if (this.state.email === "foo@bar.baz") {
           this.setState({
-            message: "foo@bar.baz forbidden error",
+            ...this.state,
+            message: "foo@bar.baz failure #71",
           });
         } else if (this.state.email === "") {
           this.setState({
             ...this.state,
-            message: "Must be a valid email",
+            message: "Ouch: email is required",
+          });
+        } else {
+          this.setState({
+            ...this.state,
+            message: "Ouch: email must be a valid email",
           });
         }
       });
@@ -220,7 +226,7 @@ export default class AppClass extends React.Component {
           </div>
         </div>
         <div className="info">
-          <h3 id="message"></h3>
+          <h3 id="message">{this.state.message}</h3>
         </div>
         <div id="keypad">
           <button id="left" onClick={this.leftClick}>
