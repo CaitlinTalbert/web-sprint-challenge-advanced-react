@@ -14,82 +14,12 @@ const initialState = {
    (1, 2) (2, 2) (3, 2)
    (1, 3) (2, 3) (3, 3)
  * up & down = y
-   left & right = x 
+   left & right = x
    reset will go back 2,2
  * */
 
 export default function AppFunctional(props) {
   const [value, setValue] = useState(initialState);
-
-  const leftClick = () => {
-    value.x <= 3 && value.x >= 2
-      ? setValue({
-          ...value,
-          x: value.x - 1,
-          steps: value.steps + 1,
-        })
-      : setValue({
-          ...value,
-          x: value.x === 3 ? 3 : value.x,
-          message: "You can't go left",
-        });
-    console.log("left click");
-  };
-
-  const upClick = () => {
-    value.y <= 3 && value.y >= 2
-      ? setValue({
-          ...value,
-          y: value.y - 1,
-          steps: value.steps + 1,
-        })
-      : setValue({
-          ...value,
-          y: value.y === 3 ? 3 : value.y,
-          message: "You can't go up",
-        });
-    console.log("up click");
-  };
-
-  const rightClick = () => {
-    value.x <= 2 && value.x >= 1
-      ? setValue({
-          ...value,
-          x: value.x + 1,
-          steps: value.steps + 1,
-        })
-      : setValue({
-          ...value,
-          x: value.x === 3 ? 3 : value.x,
-          message: "You can't go right",
-        });
-    console.log("right click");
-  };
-
-  const downClick = () => {
-    value.y <= 2 && value.y >= 1
-      ? setValue({
-          ...value,
-          y: value.y + 1,
-          steps: value.steps + 1,
-        })
-      : setValue({
-          ...value,
-          y: value.y === 3 ? 3 : value.y,
-          message: "You cant go down",
-        });
-    console.log("down click");
-  };
-
-  const resetClick = () => {
-    setValue({
-      ...value,
-      x: 2,
-      y: 2,
-      steps: 0,
-    });
-    console.log("reset click");
-  };
 
   const onChange = (e) => {
     setValue({
@@ -100,10 +30,10 @@ export default function AppFunctional(props) {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
     axios
       .post("http://localhost:9000/api/result", value)
       .then((resp) => {
-        console.log(resp);
         setValue({
           ...value,
           message: resp.data.message,
@@ -128,6 +58,73 @@ export default function AppFunctional(props) {
           });
         }
       });
+  };
+
+  const leftClick = () => {
+    value.x <= 3 && value.x >= 2
+      ? setValue({
+          ...value,
+          x: value.x - 1,
+          steps: value.steps + 1,
+        })
+      : setValue({
+          ...value,
+          x: value.x === 3 ? 3 : value.x,
+          message: "You can't go left",
+        });
+  };
+
+  const upClick = () => {
+    value.y <= 3 && value.y >= 2
+      ? setValue({
+          ...value,
+          y: value.y - 1,
+          steps: value.steps + 1,
+        })
+      : setValue({
+          ...value,
+          y: value.y === 3 ? 3 : value.y,
+          message: "You can't go up",
+        });
+  };
+
+  const rightClick = () => {
+    value.x <= 2 && value.x >= 1
+      ? setValue({
+          ...value,
+          x: value.x + 1,
+          steps: value.steps + 1,
+        })
+      : setValue({
+          ...value,
+          x: value.x === 3 ? 3 : value.x,
+          message: "You can't go right",
+        });
+  };
+
+  const downClick = () => {
+    value.y <= 2 && value.y >= 1
+      ? setValue({
+          ...value,
+          y: value.y + 1,
+          steps: value.steps + 1,
+        })
+      : setValue({
+          ...value,
+          y: value.y === 3 ? 3 : value.y,
+          message: "You can't go down",
+        });
+  };
+
+  const resetClick = () => {
+    setValue({
+      ...value,
+      x: 2,
+      y: 2,
+      steps: 0,
+      email: "",
+      message: "",
+    });
   };
 
   return (
@@ -204,7 +201,7 @@ export default function AppFunctional(props) {
         </div>
       </div>
       <div className="info">
-        <h3 id="message"></h3>
+        <h3 id="message">{value.message}</h3>
       </div>
       <div id="keypad">
         <button id="left" onClick={leftClick}>

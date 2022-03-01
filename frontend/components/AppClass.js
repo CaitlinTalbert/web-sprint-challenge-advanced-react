@@ -34,7 +34,6 @@ export default class AppClass extends React.Component {
           x: this.state.x === 3 ? 2 : this.state.x,
           message: "You can't go left",
         });
-    console.log("click");
   };
 
   upClick = () => {
@@ -49,7 +48,6 @@ export default class AppClass extends React.Component {
           y: this.state.y === 3 ? 2 : this.state.y,
           message: "You can't go up",
         });
-    console.log("click");
   };
 
   rightClick = () => {
@@ -64,7 +62,6 @@ export default class AppClass extends React.Component {
           x: this.state.x === 3 ? 3 : this.state.x,
           message: "You can't go right",
         });
-    console.log("click");
   };
 
   downClick = () => {
@@ -79,7 +76,6 @@ export default class AppClass extends React.Component {
           y: this.state.y === 3 ? 3 : this.state.y,
           message: "You can't move down",
         });
-    console.log("click");
   };
 
   resetClick = () => {
@@ -88,7 +84,6 @@ export default class AppClass extends React.Component {
       y: 2,
       steps: 0,
     });
-    console.log("click");
   };
 
   onChange = (event) => {
